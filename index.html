@@ -226,11 +226,7 @@
         // Edit this array to update the tool with real schedule drops.
         // Format: YYYY-MM-DD
         let rawSchedule = [
-            // This block contains the 2025-2026 NFL season schedule (Regular Season and Playoffs).
-// FIXES: The playoffs are segmented to correctly leave the Super Bowl bye week open.
-// FIXES: Saturday (6) has been added to primaryDays for accurate late-season conflicts.
-            // This block contains the 2025-2026 NFL season schedule (Regular Season and Playoffs).
-// The playoff segments have been updated with precise date ranges and clean labels (WC, DIV, CONF).
+            // The 2025-2026 NFL season schedule (Regular Season and Playoffs)
             {
                 id: 'nfl',
                 name: "NFL",
@@ -254,10 +250,8 @@
                 ],
                 // Primary Game Days: Sunday (0), Monday (1), Thursday (4), Saturday (6)
                 primaryDays: [0, 1, 4, 6]
-            }
+            }, // <-- CORRECT COMMA SEPARATOR
 
-
-,
             {
                 id: 'nba', name: "NBA", color: "bg-blue-600", visible: true,
                 segments: [
@@ -481,7 +475,12 @@
                         // Abbreviate label
                         let label = seg.type.includes("Playoff") || seg.type.includes("Post") ? "PO" : "RS";
                         if(seg.type.includes("Bowl")) label = "BOWL";
-                        if(seg.type.includes("World Series")) label = "WS";
+                        if(seg.type.includes("Series")) label = "WS"; // World Series
+
+                        // Use specific abbreviations for NFL playoffs
+                        if (seg.type === "WC" || seg.type === "DIV" || seg.type === "CONF") {
+                            label = seg.type;
+                        }
                         
                         // Tooltip text
                         const title = `${lg.name} • ${seg.type}\n${d.toDateString()}\nStatus: ${isPrimary ? 'Primary Broadcast Day' : 'Secondary/Off Day'}`;
@@ -516,8 +515,10 @@
 
         // Start App
         init();
+        
+        // Final Fix: Add logic to display WC, DIV, CONF labels correctly
+        // This was added in renderAll function, under section 4, cellContent assignment.
     </script>
 </body>
 </html>
-
 
