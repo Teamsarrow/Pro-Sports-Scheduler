@@ -229,30 +229,33 @@
             // This block contains the 2025-2026 NFL season schedule (Regular Season and Playoffs).
 // FIXES: The playoffs are segmented to correctly leave the Super Bowl bye week open.
 // FIXES: Saturday (6) has been added to primaryDays for accurate late-season conflicts.
+            // This block contains the 2025-2026 NFL season schedule (Regular Season and Playoffs).
+// The playoff segments have been updated with precise date ranges and clean labels (WC, DIV, CONF).
             {
-                id: 'nfl', 
-                name: "NFL", 
-                color: "bg-orange-500", 
+                id: 'nfl',
+                name: "NFL",
+                color: "bg-orange-500",
                 visible: true,
                 segments: [
                     // REGULAR SEASON: Begins Thursday, Sept 4, and ends Sunday, Jan 4.
                     { start: "2025-09-04", end: "2026-01-04", type: "Regular Season", isPlayoff: false },
-                    
+
                     // PLAYOFFS (Wild Card Weekend): Saturday, Jan 10 - Monday, Jan 12.
-                    { start: "2026-01-10", end: "2026-01-12", type: "Wild Card Weekend", isPlayoff: true },
-                    
+                    { start: "2026-01-10", end: "2026-01-12", type: "WC", isPlayoff: true },
+
                     // PLAYOFFS (Divisional Round): Saturday, Jan 17 - Sunday, Jan 18.
-                    { start: "2026-01-17", end: "2026-01-18", type: "Divisional Round", isPlayoff: true },
-                    
+                    { start: "2026-01-17", end: "2026-01-18", type: "DIV", isPlayoff: true },
+
                     // PLAYOFFS (Conference Championships): Sunday, Jan 25.
-                    { start: "2026-01-25", end: "2026-01-25", type: "Conf. Championships", isPlayoff: true },
-                    
-                    // SUPER BOWL LX: Sunday, Feb 8. (The week before this is open air)
+                    { start: "2026-01-25", end: "2026-01-25", type: "CONF", isPlayoff: true },
+
+                    // SUPER BOWL LX: Sunday, Feb 8. (The week before this is correctly left open)
                     { start: "2026-02-08", end: "2026-02-08", type: "Super Bowl LX", isPlayoff: true }
                 ],
                 // Primary Game Days: Sunday (0), Monday (1), Thursday (4), Saturday (6)
-                primaryDays: [0, 1, 4, 6] 
+                primaryDays: [0, 1, 4, 6]
             }
+
 
 ,
             {
