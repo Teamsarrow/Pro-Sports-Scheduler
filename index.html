@@ -226,15 +226,35 @@
         // Edit this array to update the tool with real schedule drops.
         // Format: YYYY-MM-DD
         let rawSchedule = [
+            // This block contains the 2025-2026 NFL season schedule (Regular Season and Playoffs).
+// FIXES: The playoffs are segmented to correctly leave the Super Bowl bye week open.
+// FIXES: Saturday (6) has been added to primaryDays for accurate late-season conflicts.
             {
-                id: 'nfl', name: "NFL", color: "bg-orange-500", visible: true,
+                id: 'nfl', 
+                name: "NFL", 
+                color: "bg-orange-500", 
+                visible: true,
                 segments: [
+                    // REGULAR SEASON: Begins Thursday, Sept 4, and ends Sunday, Jan 4.
                     { start: "2025-09-04", end: "2026-01-04", type: "Regular Season", isPlayoff: false },
-                    { start: "2026-01-10", end: "2026-02-08", type: "Playoffs / SB", isPlayoff: true }
+                    
+                    // PLAYOFFS (Wild Card Weekend): Saturday, Jan 10 - Monday, Jan 12.
+                    { start: "2026-01-10", end: "2026-01-12", type: "Wild Card Weekend", isPlayoff: true },
+                    
+                    // PLAYOFFS (Divisional Round): Saturday, Jan 17 - Sunday, Jan 18.
+                    { start: "2026-01-17", end: "2026-01-18", type: "Divisional Round", isPlayoff: true },
+                    
+                    // PLAYOFFS (Conference Championships): Sunday, Jan 25.
+                    { start: "2026-01-25", end: "2026-01-25", type: "Conf. Championships", isPlayoff: true },
+                    
+                    // SUPER BOWL LX: Sunday, Feb 8. (The week before this is open air)
+                    { start: "2026-02-08", end: "2026-02-08", type: "Super Bowl LX", isPlayoff: true }
                 ],
-                // Sunday (0), Monday (1), Thursday (4)
-                primaryDays: [0, 1, 4] 
-            },
+                // Primary Game Days: Sunday (0), Monday (1), Thursday (4), Saturday (6)
+                primaryDays: [0, 1, 4, 6] 
+            }
+
+,
             {
                 id: 'nba', name: "NBA", color: "bg-blue-600", visible: true,
                 segments: [
